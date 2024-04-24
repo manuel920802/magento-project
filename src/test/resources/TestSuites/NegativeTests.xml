@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<suite name="NegativeTestSuite" verbose="1">
+
+    <test name="NegativeUsernameTest-CH">
+        <parameter name="username" value="test@mail.com"/>
+        <parameter name="password" value="Selenium123"/>
+        <parameter name="expectedMessage" value="The account sign-in was incorrect or your account is disabled temporarily. Please wait and try again later."
+        />
+        <parameter name="browser" value="chrome"/>
+        <classes>
+            <class name="com.magento.softwaretestingboard.NegativeTests"/>
+        </classes>
+    </test>
+
+    <test name="NegativeUsernameTest-FF">
+        <parameter name="username" value="test@mail.com"/>
+        <parameter name="password" value="Selenium123"/>
+        <parameter name="expectedMessage" value="The account sign-in was incorrect or your account is disabled temporarily. Please wait and try again later."
+        />
+        <parameter name="browser" value="firefox"/>
+        <classes>
+            <class name="com.magento.softwaretestingboard.NegativeTests"/>
+        </classes>
+    </test>
+
+    <test name="NegativePasswordTest-CH">
+        <parameter name="username" value="manuel76046@hotmail.com"/>
+        <parameter name="password" value="incorrectPassword"/>
+        <parameter name="expectedMessage" value="The account sign-in was incorrect or your account is disabled temporarily. Please wait and try again later."
+        />
+        <parameter name="browser" value="chrome"/>
+        <classes>
+            <class name="com.magento.softwaretestingboard.NegativeTests"/>
+        </classes>
+    </test>
+
+    <test name="NegativePasswordTest-FF">
+        <parameter name="username" value="manuel76046@hotmail.com"/>
+        <parameter name="password" value="incorrectPassword"/>
+        <parameter name="expectedMessage" value="The account sign-in was incorrect or your account is disabled temporarily. Please wait and try again later."
+        />
+        <parameter name="browser" value="firefox"/>
+        <classes>
+            <class name="com.magento.softwaretestingboard.NegativeTests"/>
+        </classes>
+    </test>
+
+</suite>

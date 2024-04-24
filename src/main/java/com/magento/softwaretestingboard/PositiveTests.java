@@ -4,9 +4,13 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+
+import java.time.Duration;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -22,8 +26,8 @@ public class PositiveTests {
     }
 
     @Test
-    public void loginTest() {
-        System.out.println("Starting login Test");
+    public void positiveLoginTest() {
+        System.out.println("Starting login positive Test");
         WebElement signIn = driver.findElement(By.xpath("//a[contains(text(),'Sign In')]"));
         signIn.click();
 
@@ -39,14 +43,15 @@ public class PositiveTests {
         //Verification
         //Check logged-in username
         String expectedMessage = "Welcome, Manuel QA!";
-        String actualMessage = driver.findElement(By.xpath("//span[@class='logged-in']")).getText();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        String actualMessage = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[@class='logged-in']"))).getText();
         assertThat(actualMessage).withFailMessage("actualMessage does not contain expectedMessage" +
                 "\nexpectedMessage: " + expectedMessage + "\nactualMessage: " + actualMessage).contains(expectedMessage);
     }
 
     @AfterClass
     public void tearDown() {
-        driver.close();
+        driver.quit();
         System.out.println("Finished login Test");
     }
 }
