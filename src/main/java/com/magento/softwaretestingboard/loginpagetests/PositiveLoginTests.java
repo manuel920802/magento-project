@@ -1,33 +1,21 @@
-package com.magento.softwaretestingboard;
+package com.magento.softwaretestingboard.loginpagetests;
 
+import com.magento.softwaretestingboard.loginpagetests.base.TestUtilities;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import java.time.Duration;
 
 import static org.assertj.core.api.Assertions.*;
 
-public class PositiveTests {
-    WebDriver driver = new ChromeDriver();
-
-    @BeforeClass
-    public void setUp() {
-        String baseUrl = "https://magento.softwaretestingboard.com/";
-        driver.manage().window().maximize();
-        driver.get(baseUrl);
-        System.out.println("Open main page");
-    }
+public class PositiveLoginTests extends TestUtilities {
 
     @Test
     public void positiveLoginTest() {
-        System.out.println("Starting login positive Test");
+        log.info("Starting login positive Test");
         WebElement signIn = driver.findElement(By.xpath("//a[contains(text(),'Sign In')]"));
         signIn.click();
 
@@ -49,9 +37,4 @@ public class PositiveTests {
                 "\nexpectedMessage: " + expectedMessage + "\nactualMessage: " + actualMessage).contains(expectedMessage);
     }
 
-    @AfterClass
-    public void tearDown() {
-        driver.quit();
-        System.out.println("Finished login Test");
-    }
 }

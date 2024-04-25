@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<suite name = "PositiveTestSuite" verbose="1">
-    <test name="PositiveTest">
-        <classes>
-            <class name="com.magento.softwaretestingboard.PositiveTests"/>
-        </classes>
-    </test>
-</suite>
