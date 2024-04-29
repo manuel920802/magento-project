@@ -2,6 +2,9 @@ package com.magento.softwaretestingboard.loginpagetests;
 
 
 import com.magento.softwaretestingboard.loginpagetests.base.TestUtilities;
+import com.magento.softwaretestingboard.loginpagetests.pages.HomePageObject;
+import com.magento.softwaretestingboard.loginpagetests.pages.MyAccountPage;
+import com.magento.softwaretestingboard.loginpagetests.pages.SignInPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -19,25 +22,18 @@ public class NegativeLoginTests extends TestUtilities {
     public void negativeLoginTest(String username, String password, String expectedErrorMessage){
         log.info("Starting login negative tests");
 
-        String baseUrl = "https://magento.softwaretestingboard.com/";
-        driver.get(baseUrl);
-        log.info("Open main page");
+        //Open main page
+        HomePageObject homePage = new HomePageObject(driver,log);
+        homePage.openHomePage();
 
-        WebElement signIn = driver.findElement(By.xpath("//a[contains(text(),'Sign In')]"));
-        signIn.click();
+        //Click SignIn link
+        SignInPage signInPage = homePage.clickSignInLink();
 
-        WebElement emailField = driver.findElement(By.id("email"));
-        emailField.sendKeys(username);
-
-        WebElement passwordField = driver.findElement(By.id("pass"));
-        passwordField.sendKeys(password);
-
-        WebElement signInButton = driver.findElement(By.id("send2"));
-        signInButton.click();
+        //Execute login
+        MyAccountPage myAccountPage = signInPage.SignIn(username,password);
 
         //Verifications
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-        String actualErrorMessage = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@data-ui-id='message-error']"))).getText();
+        String actualErrorMessage = signInPage.getErrorMessageText();
         assertThat(actualErrorMessage).withFailMessage("actualErrorMessage does not contain expectedErrorMessage" +
                 "\nexpectedErrorMessage: " + expectedErrorMessage + "\nactualErrorMessage: " + actualErrorMessage).contains(expectedErrorMessage);
 

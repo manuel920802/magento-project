@@ -1,6 +1,10 @@
 package com.magento.softwaretestingboard.loginpagetests;
 
 import com.magento.softwaretestingboard.loginpagetests.base.TestUtilities;
+import com.magento.softwaretestingboard.loginpagetests.pages.HomePageObject;
+import com.magento.softwaretestingboard.loginpagetests.pages.MyAccountPage;
+import com.magento.softwaretestingboard.loginpagetests.pages.SignInPage;
+import org.assertj.core.api.Assertions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -16,23 +20,25 @@ public class PositiveLoginTests extends TestUtilities {
     @Test
     public void positiveLoginTest() {
         log.info("Starting login positive Test");
-        WebElement signIn = driver.findElement(By.xpath("//a[contains(text(),'Sign In')]"));
-        signIn.click();
 
-        WebElement emailField = driver.findElement(By.id("email"));
-        emailField.sendKeys("manuel76046@hotmail.com");
+        //Open main page
+        HomePageObject homePage = new HomePageObject(driver,log);
+        homePage.openHomePage();
 
-        WebElement passwordField = driver.findElement(By.id("pass"));
-        passwordField.sendKeys("Selenium123");
+        //Click on SignIn link
+        SignInPage signInPage = homePage.clickSignInLink();
 
-        WebElement signInButton = driver.findElement(By.id("send2"));
-        signInButton.click();
+        //Execute login
+        MyAccountPage myAccountPage = signInPage.SignIn("manuel76046@hotmail.com", "Selenium123");
 
-        //Verification
+        //Verifications
+        //My Account link is visible
+        myAccountPage.clickDropdown();
+        assertThat(myAccountPage.isMyAccountLinkVisible()).withFailMessage("MyAccount link is NOT displayed").isTrue();
+
         //Check logged-in username
         String expectedMessage = "Welcome, Manuel QA!";
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-        String actualMessage = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[@class='logged-in']"))).getText();
+        String actualMessage = myAccountPage.getLoggedMessageText();
         assertThat(actualMessage).withFailMessage("actualMessage does not contain expectedMessage" +
                 "\nexpectedMessage: " + expectedMessage + "\nactualMessage: " + actualMessage).contains(expectedMessage);
     }
