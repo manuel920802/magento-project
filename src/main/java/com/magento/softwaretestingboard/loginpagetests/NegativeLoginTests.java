@@ -30,9 +30,10 @@ public class NegativeLoginTests extends TestUtilities {
         SignInPage signInPage = homePage.clickSignInLink();
 
         //Execute login
-        MyAccountPage myAccountPage = signInPage.SignIn(username,password);
+        signInPage.negativeLogin(username,password);
 
         //Verifications
+        signInPage.waitForErrorMessage();
         String actualErrorMessage = signInPage.getErrorMessageText();
         assertThat(actualErrorMessage).withFailMessage("actualErrorMessage does not contain expectedErrorMessage" +
                 "\nexpectedErrorMessage: " + expectedErrorMessage + "\nactualErrorMessage: " + actualErrorMessage).contains(expectedErrorMessage);

@@ -5,6 +5,8 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+import java.time.Duration;
+
 public class SignInPage extends BasePageObject {
 
     private final By emailFieldLocator = By.id("email");
@@ -25,8 +27,19 @@ public class SignInPage extends BasePageObject {
         return new MyAccountPage(driver,log);
     }
 
+    public void negativeLogin(String email, String password){
+        log.info("Executing Negative login with email : " + email + " and password: " + password);
+        type(email,emailFieldLocator);
+        type(password,passwordFieldLocator);
+        click(signInButtonLocator);
+    }
+
+    //Wait for error message to be visible on the page
+    public void waitForErrorMessage(){
+        waitForVisibilityOf(errorMessageLocator, Duration.ofSeconds(5));
+    }
+
     public String getErrorMessageText(){
-        waitForVisibilityOf(errorMessageLocator);
         return find(errorMessageLocator).getText();
     }
 

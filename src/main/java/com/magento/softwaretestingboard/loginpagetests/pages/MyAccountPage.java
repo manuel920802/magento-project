@@ -6,6 +6,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import java.time.Duration;
+
 public class MyAccountPage extends BasePageObject {
 
     private final By myAccountLocator = By.xpath("//div[@class='customer-menu']//a[contains(text(),'My Account')]");
@@ -21,9 +23,13 @@ public class MyAccountPage extends BasePageObject {
         return find(myAccountLocator).isDisplayed();
     }
 
+    //Wait for element to be visible on the page
+    public void waitForElement(){
+        waitForVisibilityOf(loggedMessageLocator, Duration.ofSeconds(5));
+    }
+
     //Return text from logged username
     public String getLoggedMessageText(){
-        waitForVisibilityOf(loggedMessageLocator);
         return find(loggedMessageLocator).getText();
     }
 

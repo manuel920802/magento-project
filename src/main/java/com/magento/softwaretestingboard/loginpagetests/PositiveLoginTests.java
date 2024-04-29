@@ -38,6 +38,7 @@ public class PositiveLoginTests extends TestUtilities {
 
         //Check logged-in username
         String expectedMessage = "Welcome, Manuel QA!";
+        myAccountPage.waitForElement();
         String actualMessage = myAccountPage.getLoggedMessageText();
         assertThat(actualMessage).withFailMessage("actualMessage does not contain expectedMessage" +
                 "\nexpectedMessage: " + expectedMessage + "\nactualMessage: " + actualMessage).contains(expectedMessage);
