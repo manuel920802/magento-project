@@ -32,9 +32,13 @@ public class NegativeLoginTests extends TestUtilities {
         //Execute login
         signInPage.negativeLogin(username,password);
 
-        //Verifications
+        //Wait for error message text to be visible
         signInPage.waitForErrorMessage();
+
+        //Get error message text
         String actualErrorMessage = signInPage.getErrorMessageText();
+
+        //Verifications
         assertThat(actualErrorMessage).withFailMessage("actualErrorMessage does not contain expectedErrorMessage" +
                 "\nexpectedErrorMessage: " + expectedErrorMessage + "\nactualErrorMessage: " + actualErrorMessage).contains(expectedErrorMessage);
 

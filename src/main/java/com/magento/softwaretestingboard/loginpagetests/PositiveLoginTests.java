@@ -4,14 +4,7 @@ import com.magento.softwaretestingboard.loginpagetests.base.TestUtilities;
 import com.magento.softwaretestingboard.loginpagetests.pages.HomePageObject;
 import com.magento.softwaretestingboard.loginpagetests.pages.MyAccountPage;
 import com.magento.softwaretestingboard.loginpagetests.pages.SignInPage;
-import org.assertj.core.api.Assertions;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Test;
-
-import java.time.Duration;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -36,10 +29,14 @@ public class PositiveLoginTests extends TestUtilities {
         myAccountPage.clickDropdown();
         assertThat(myAccountPage.isMyAccountLinkVisible()).withFailMessage("MyAccount link is NOT displayed").isTrue();
 
-        //Check logged-in username
+        //Wait for logged message text element to be visible
+        myAccountPage.waitForLoggedMessage();
+
+        //Get logged-in username text
         String expectedMessage = "Welcome, Manuel QA!";
-        myAccountPage.waitForElement();
         String actualMessage = myAccountPage.getLoggedMessageText();
+
+        //Check logged-in username
         assertThat(actualMessage).withFailMessage("actualMessage does not contain expectedMessage" +
                 "\nexpectedMessage: " + expectedMessage + "\nactualMessage: " + actualMessage).contains(expectedMessage);
     }

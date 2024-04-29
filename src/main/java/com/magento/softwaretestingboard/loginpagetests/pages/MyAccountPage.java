@@ -4,7 +4,6 @@ import com.magento.softwaretestingboard.loginpagetests.base.BasePageObject;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 
 import java.time.Duration;
 
@@ -24,7 +23,7 @@ public class MyAccountPage extends BasePageObject {
     }
 
     //Wait for element to be visible on the page
-    public void waitForElement(){
+    public void waitForLoggedMessage(){
         waitForVisibilityOf(loggedMessageLocator, Duration.ofSeconds(5));
     }
 
