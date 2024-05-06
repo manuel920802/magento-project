@@ -17,12 +17,15 @@ public class PositiveLoginTests extends TestUtilities {
         //Open main page
         HomePageObject homePage = new HomePageObject(driver,log);
         homePage.openHomePage();
+        takeScreenshot("Home page opened");
 
         //Click on SignIn link
         SignInPage signInPage = homePage.clickSignInLink();
+        takeScreenshot("Sign in page opened");
 
         //Execute login
         MyAccountPage myAccountPage = signInPage.SignIn("manuel76046@hotmail.com", "Selenium123");
+        takeScreenshot("My Account page opened");
 
         //Verifications
         //My Account link is visible
