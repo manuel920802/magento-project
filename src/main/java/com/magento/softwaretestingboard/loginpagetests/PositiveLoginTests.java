@@ -12,8 +12,6 @@ public class PositiveLoginTests extends TestUtilities {
 
     @Test
     public void positiveLoginTest() {
-        log.info("Starting login positive Test");
-
         //Open main page
         HomePageObject homePage = new HomePageObject(driver,log);
         homePage.openHomePage();

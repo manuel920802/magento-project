@@ -9,6 +9,7 @@ import org.testng.annotations.*;
 
 import java.lang.reflect.Method;
 
+@Listeners({com.magento.softwaretestingboard.loginpagetests.base.TestListener.class})
 public class BaseTest {
 
     protected WebDriver driver;

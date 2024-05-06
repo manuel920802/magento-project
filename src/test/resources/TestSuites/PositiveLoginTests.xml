@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <suite name = "PositiveLoginTestSuite" verbose="1">
 
+<!--    <listeners>
+        <listener class-name="com.magento.softwaretestingboard.loginpagetests.base.TestListener"/>
+    </listeners>-->
+
     <test name="PositiveTest">
         <classes>
             <class name="com.magento.softwaretestingboard.loginpagetests.PositiveLoginTests"/>

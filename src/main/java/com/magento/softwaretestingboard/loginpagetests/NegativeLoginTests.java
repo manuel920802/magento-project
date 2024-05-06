@@ -20,8 +20,6 @@ public class NegativeLoginTests extends TestUtilities {
     @Parameters({"username","password","expectedMessage"})
     @Test(priority = 1)
     public void negativeLoginTest(String username, String password, String expectedErrorMessage){
-        log.info("Starting login negative tests");
-
         //Open main page
         HomePageObject homePage = new HomePageObject(driver,log);
         homePage.openHomePage();
